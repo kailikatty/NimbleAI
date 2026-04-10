@@ -1,11 +1,36 @@
-<div id="chatBox"></div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NimbleAI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<textarea></textarea>
+<body>
+  <div class="app">
 
-<button onclick="generateSummary()">Generate</button>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>NimbleAI</h2>
+      <ul>
+        <li class="active">Overview</li>
+        <li>Email Summarizer</li>
+        <li>Task Generator</li>
+      </ul>
+    </div>
 
-<div class="output"></div>
+    <!-- Main -->
+    <div class="main">
+      <h1>Email Summarizer</h1>
 
-<script src="script.js"></script>
+      <div class="card">
+        <textarea placeholder="Paste your email here..."></textarea>
+        <button onclick="generateSummary()">Generate Summary</button>
+      </div>
 
-<link rel="stylesheet" href="style.css">
+      <div class="output"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
