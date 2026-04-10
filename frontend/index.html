@@ -13,25 +13,46 @@
     <div class="sidebar">
       <h2>NimbleAI</h2>
       <ul>
-        <li class="active">Overview</li>
-        <li>Email Summarizer</li>
-        <li>Task Generator</li>
+        <li onclick="showPage('overview')" class="active">Overview</li>
+        <li onclick="showPage('email')">Email Summarizer</li>
+        <li onclick="showPage('task')">Task Generator</li>
+        <li onclick="showPage('reply')">Auto Reply</li>
+        <li onclick="showPage('file')">File Analyzer</li>
       </ul>
     </div>
 
     <!-- Main -->
     <div class="main">
-      <h1>Email Summarizer</h1>
 
-      <div class="card">
-        <textarea placeholder="Paste your email here..."></textarea>
-        <button onclick="generateSummary()">Generate Summary</button>
-      </div>
+  <div id="overview" class="page">
+    <h1>Overview</h1>
+    <p>Welcome to NimbleAI 🚀</p>
+  </div>
 
-      <div class="output"></div>
+  <div id="email" class="page">
+    <h1>Email Summarizer</h1>
+
+    <div class="card">
+      <textarea placeholder="Paste your email here..."></textarea>
+      <button onclick="generateSummary()">Generate Summary</button>
     </div>
 
+    <div class="output"></div>
   </div>
+
+  <div id="task" class="page">
+    <h1>Task Generator</h1>
+  </div>
+
+  <div id="reply" class="page">
+    <h1>Auto Reply</h1>
+  </div>
+
+  <div id="file" class="page">
+    <h1>File Analyzer</h1>
+  </div>
+
+</div>
 
   <script src="script.js"></script>
 </body>
