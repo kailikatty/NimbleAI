@@ -1,4 +1,5 @@
 async function generateSummary() {
+  alert("Working!");
   const text = document.querySelector("textarea").value;
   console.log(text);
 
