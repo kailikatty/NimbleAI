@@ -60,18 +60,21 @@ h1 {
 .sidebar li:hover {
   transform: translateY(-2px) scale(1.02); /* 👈 ลอยขึ้น */
   box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* 👈 เงา */
-  background: #3730a3; /* 👈 light purple */
+  background: #f5f7ff; /* 👈 light purple */
+  color: #4338ca;
+  transform: translateY(-2px); 
 }
 
 .sidebar li.active {
-  background: #6366f1; /* dark purple */
-  color: white;
+  background: #eef2ff; /* light purple */
+  color: #4f46e5;  /* dark purple */
   font-weight: 500;
+  border: 1px solid #e0e7ff;
 }
 
 .sidebar li.active:hover {
-  background: #6366f1; /* dark purple */
-  color: white;
+  background: #e0e7ff; 
+  color: #4338ca;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(99,102,241,0.4); /* เงาม่วง */
 }
