@@ -5,19 +5,23 @@
   margin: 0 auto; /* 👈 ทำให้ content อยู่กลาง */
 }
 
+/* ===== Global ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f5f7fb;
 }
 
-/* Layout หลัก */
+h1 {
+  margin-bottom: 20px;
+}
+
+/* ===== Layout ===== */
 .app {
   display: flex;
   height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
   width: 220px;
   background: white;
@@ -25,25 +29,14 @@ body {
   border-right: 1px solid #eee;
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .sidebar ul {
-    display: flex;
-    gap: 10px;
-  }
-
-  .sidebar li {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
+.main {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
+/* ===== Sidebar ===== */
 .sidebar h2 {
   margin-bottom: 30px;
 }
@@ -64,25 +57,17 @@ body {
   color: #3730a3;
 }
 
-/* Main */
-.main {
-  flex: 1;
-  padding: 40px;
-}
-
-/* Card */
+/* ===== Card ===== */
 .card {
   background: white;
   padding: 24px;
   border-radius: 16px;
   display: flex;
-  flex-direction: column; /* 👈 บังคับ mobile-first */
+  flex-direction: column;
   gap: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
-  
 
-/* textarea */
 textarea {
   width: 100%;
   height: 120px;
@@ -92,7 +77,6 @@ textarea {
   font-size: 16px;
 }
 
-/* button */
 button {
   width: 100%;
   height: 50px;
@@ -111,13 +95,12 @@ button:hover {
   opacity: 0.95;
 }
 
-/* output */
 .output {
   margin-top: 20px;
   font-size: 16px;
 }
 
-/* 📱 Mobile */
+/* ===== Mobile ===== */
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
@@ -129,7 +112,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     padding: 16px;
-    gap: 10 px;
+    gap: 10px;
   }
 
   .sidebar ul {
@@ -144,27 +127,7 @@ button:hover {
     font-size: 14px;
   }
 
-
   .main {
     padding: 20px;
   }
-
-  .card {
-    flex-direction: column;
-  }
-
-  button {
-    width: 100%;
-    height: 50px;
-  }
-
-  
-h1 {
-  margin-bottom: 20px;
-}
-
-body {
-  background: #f5f7fb;
-}
-
 }
