@@ -1,30 +1,105 @@
 body {
+  margin: 0;
   font-family: Arial;
   background: #f4f6fb;
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
 }
 
+/* Layout หลัก */
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: white;
+  padding: 20px;
+  border-right: 1px solid #eee;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+/* textarea */
 textarea {
-  width: 300px;
-  height: 100px;
+  flex: 1;
+  height: 120px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
 }
 
+/* button */
 button {
-  margin-left: 10px;
-  padding: 10px 20px;
+  width: 150px;
   border: none;
-  background: #2563eb;
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
+/* output */
 .output {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .card {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+    height: 50px;
+  }
 }
