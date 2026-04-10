@@ -18,6 +18,25 @@ body {
   border-right: 1px solid #eee;
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 10px;
+  }
+
+  .sidebar li {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
 .sidebar h2 {
   margin-bottom: 30px;
 }
@@ -51,6 +70,7 @@ body {
   border-radius: 12px;
   display: flex;
   gap: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 /* textarea */
@@ -87,7 +107,9 @@ button {
   .sidebar {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    gap: 10 px;
   }
 
   .main {
@@ -102,4 +124,8 @@ button {
     width: 100%;
     height: 50px;
   }
+
+  button:hover {
+  opacity: 0.9;
+}
 }
