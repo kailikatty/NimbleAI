@@ -107,10 +107,13 @@ button {
   transition: all 0.2s ease;
 }
 
+button:hover {
+  opacity: 0.95;
+}
+
 button:active {
-  background: #6366f1;
-  transform: scale(0.97);
-  opacity: 0.9;
+  transform: scale(0.96);
+  opacity: 0.85;
 }
 
 .output {
