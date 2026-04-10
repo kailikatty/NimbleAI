@@ -1,0 +1,30 @@
+body {
+  font-family: Arial;
+  background: #f4f6fb;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+textarea {
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.output {
+  margin-top: 20px;
+  font-size: 18px;
+}
