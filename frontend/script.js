@@ -53,3 +53,22 @@ function addMessage(text, sender) {
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.style.display = 'none';
+  });
+
+  document.getElementById(pageId).style.display = 'block';
+
+  document.querySelectorAll('.sidebar li').forEach(li => {
+    li.classList.remove('active');
+  });
+
+  event.target.classList.add('active');
+}
+
+// default หน้าแรก
+window.onload = function () {
+  showPage('overview');
+};
