@@ -130,13 +130,28 @@ button:hover {
   .sidebar ul {
     display: flex;
     justify-content: center;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin-top: 10px;
   }
 
   .sidebar li {
-    padding: 6px 12px;
+    padding: 8px 14px;
     font-size: 14px;
+    border-radius: 999px; /* pill */
+    background: #f1f5f9;
+    transition: all 0.2s ease;
+  }
+
+  .sidebar li.active {
+    background: #e0e7ff;
+    color: #3730a3;
+    font-weight: 500;
+  }
+
+  .sidebar li:hover {
+    background: #e5e7eb;
   }
 
   .main {
