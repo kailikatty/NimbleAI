@@ -3,7 +3,7 @@ async function generateSummary() {
   const text = document.querySelector("textarea").value;
   console.log(text);
 
-  const res = await fetch("http://127.0.0.1:8000/email/summarize", {
+  const res = await fetch("https://nimbleai.onrender.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
