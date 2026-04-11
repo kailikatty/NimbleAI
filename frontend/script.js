@@ -1,58 +1,52 @@
+// ===== EMAIL =====
 async function generateSummary() {
-  alert("Working!");
-  const text = document.querySelector("textarea").value;
-  console.log(text);
+  const input = document.getElementById("emailInput").value;
+  const output = document.getElementById("emailOutput");
 
-  const res = await fetch("http://127.0.0.1:8000/email/summarize", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text })
-  });
+  if (!input) {
+    output.innerHTML = "<p class='empty'>Please enter email</p>";
+    return;
+  }
 
-  const data = await res.json();
-  document.querySelector(".output").innerText = data.summary;
+  output.innerHTML = "Loading...";
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/email/summarize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: input })
+    });
+
+    const data = await res.json();
+
+    output.innerHTML = `<p>${data.summary}</p>`;
+  } catch (err) {
+    output.innerHTML = "<p class='empty'>Error occurred</p>";
+  }
 }
 
-<script>
-    function generateSummary() {
-      const input = document.getElementById("emailInput").value;
-      const output = document.getElementById("emailOutput");
 
-      if (!input) {
-        output.innerHTML = "<p class='empty'>Please enter email</p>";
-        return;
-      }
-
-      output.innerHTML = "<p>Summary result...</p>";
-    }
-  </script>
-
-
+// ===== OPTIONAL CHAT STYLE =====
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const message = input.value;
 
   if (!message) return;
 
-  // แสดงข้อความ user
   addMessage(message, "user");
 
-  // เรียก API FastAPI
   const res = await fetch("http://127.0.0.1:8000/email/summarize", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      text: message,
-    }),
+    body: JSON.stringify({ text: message }),
   });
 
   const data = await res.json();
 
-  // แสดงผลลัพธ์
   addMessage(data.summary, "bot");
 
   input.value = "";
