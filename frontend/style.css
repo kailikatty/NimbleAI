@@ -208,4 +208,52 @@ button:active {
     padding: 20px;
   }
 
+  .subtitle {
+  color: #777;
+  margin-bottom: 24px;
+}
+
+/* grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* feature card */
+.feature {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* buttons */
+.feature button,
+.quick-actions button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #5f6fff, #4a4cff);
+  color: white;
+  cursor: pointer;
+}
+
+/* quick actions */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* tips */
+.tips {
+  background: #f9fafc;
+  border: 1px dashed #ddd;
+}
+
 }
