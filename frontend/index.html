@@ -31,63 +31,70 @@
   </div>
 
   <div id="email" class="page">
-    <h1>Email Summarizer</h1>
+  <h1>Email Summarizer</h1>
 
-    <div class="card">
-      <textarea placeholder="Paste your email here..."></textarea>
-      <button onclick="generateSummary()">Generate Summary</button>
-    </div>
-
-    <div class="output"></div>
+  <div class="card">
+    <textarea id="emailInput" placeholder="Paste your email here..."></textarea>
+    <button onclick="generateSummary()">Generate Summary</button>
   </div>
 
-  <div id="task" class="page" style="display:none;">
+  <div id="emailOutput" class="output">
+    <p class="empty">No summary yet</p>
+  </div>
+</div>
+
+
+<div id="task" class="page" style="display:none;">
   <h1>Task Generator</h1>
 
   <div class="task-container">
     <div class="card">
-      <textarea placeholder="Describe your task..."></textarea>
-      <button>Generate Tasks</button>
+      <textarea id="taskInput" placeholder="Describe your task..."></textarea>
+      <button onclick="generateTasks()">Generate Tasks</button>
     </div>
 
     <div class="card">
       <h3>Generated Tasks</h3>
-      <ul></ul>
+      <div id="taskOutput">
+        <p class="empty">No results yet</p>
+      </div>
     </div>
   </div>
 </div>
-  
 
-  <div id="reply" class="page" style="display:none;">
+
+<div id="reply" class="page" style="display:none;">
   <h1>Auto Reply</h1>
 
   <div class="card">
-    <textarea placeholder="Paste message here..."></textarea>
-    <button>Generate Reply</button>
+    <textarea id="msgInput" placeholder="Paste message here..."></textarea>
+    <button onclick="generateReply()">Generate Reply</button>
   </div>
 
   <div class="card">
     <h3>Reply</h3>
-    <div class="output"></div>
+    <div id="replyOutput">
+      <p class="empty">No reply yet</p>
+    </div>
   </div>
 </div>
-      
 
-  <div id="file" class="page" style="display:none;">
+
+<div id="file" class="page" style="display:none;">
   <h1>File Analyzer</h1>
 
   <div class="card">
-    <input type="file" />
-    <button>Analyze File</button>
+    <input type="file" id="fileInput" />
+    <button onclick="analyzeFile()">Analyze File</button>
   </div>
 
   <div class="card">
     <h3>Result</h3>
-    <div class="output"></div>
+    <div id="fileOutput">
+      <p class="empty">No file analyzed yet</p>
+    </div>
   </div>
 </div>
-
-</div>
-
+      
   <script src="script.js"></script>
 </body>
