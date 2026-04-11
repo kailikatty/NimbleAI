@@ -2,11 +2,16 @@
 async function generateSummary() {
   const input = document.getElementById("emailInput").value;
   const output = document.getElementById("emailOutput");
+  const card = document.getElementById("emailResultCard"); // 👈 เพิ่ม
 
   if (!input) {
+    // ยังไม่ต้องโชว์ card ถ้าไม่มี input
     output.innerHTML = "<p class='empty'>Please enter email</p>";
     return;
   }
+
+  // 👇 show card ตอน generate
+  card.classList.remove("hidden");
 
   output.innerHTML = "Loading...";
 
