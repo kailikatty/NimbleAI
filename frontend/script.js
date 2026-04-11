@@ -15,6 +15,21 @@ async function generateSummary() {
   document.querySelector(".output").innerText = data.summary;
 }
 
+<script>
+    function generateSummary() {
+      const input = document.getElementById("emailInput").value;
+      const output = document.getElementById("emailOutput");
+
+      if (!input) {
+        output.innerHTML = "<p class='empty'>Please enter email</p>";
+        return;
+      }
+
+      output.innerHTML = "<p>Summary result...</p>";
+    }
+  </script>
+
+
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const message = input.value;
