@@ -95,6 +95,22 @@ h1 {
   transition: all 0.3s ease; 
 }
 
+#file .card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#file input[type="file"] {
+  font-size: 16px;
+  padding: 10px;
+}
+
+#file button {
+  font-size: 16px;
+  padding: 14px;
+}
+
+
 .hidden {
   display: none;
 }
