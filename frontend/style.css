@@ -280,7 +280,9 @@ button:active {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: repeat(2,1fr) !important;
+    gap: 20px;
   }
 
   .hero {
