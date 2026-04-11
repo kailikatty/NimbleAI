@@ -26,9 +26,53 @@
     <div class="main">
 
   <div id="overview" class="page">
-    <h1>Overview</h1>
-    <p>Welcome to NimbleAI 🚀</p>
+  <h1>Welcome to NimbleAI 🚀</h1>
+  <p class="subtitle">Your AI productivity assistant</p>
+
+  <!-- Feature Cards -->
+  <div class="grid">
+    <div class="card feature">
+      <h3>📧 Email Summarizer</h3>
+      <p>Turn long emails into short summaries instantly</p>
+      <button onclick="showPage('email')">Try now</button>
+    </div>
+
+    <div class="card feature">
+      <h3>🧠 Task Generator</h3>
+      <p>Break ideas into actionable steps</p>
+      <button onclick="showPage('task')">Generate</button>
+    </div>
+
+    <div class="card feature">
+      <h3>💬 Auto Reply</h3>
+      <p>Create smart replies in seconds</p>
+      <button onclick="showPage('reply')">Reply</button>
+    </div>
+
+    <div class="card feature">
+      <h3>📂 File Analyzer</h3>
+      <p>Extract insights from your files</p>
+      <button onclick="showPage('file')">Analyze</button>
+    </div>
   </div>
+
+  <!-- Quick Actions -->
+  <div class="card">
+    <h3>⚡ Quick Actions</h3>
+    <p>Jump directly into your workflow</p>
+    <div class="quick-actions">
+      <button onclick="showPage('email')">Summarize Email</button>
+      <button onclick="showPage('task')">Create Tasks</button>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="card tips">
+    <h3>💡 Tips</h3>
+    <p>Use clear input to get better AI results.</p>
+  </div>
+</div>
+      
 
   <div id="email" class="page">
   <h1>Email Summarizer</h1>
