@@ -1,14 +1,12 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
+from services.summarizer import summarize_email
 
 router = APIRouter()
 
-# request schema
-class EmailRequest(BaseModel):
+class Request(BaseModel):
     text: str
 
-# API endpoint
-@router.post("/summarize")
-def summarize_email(req: EmailRequest):
-    summary = "Summary: " + req.text[:100]
-    return {"summary": summary}
+@router.post("/email/summarize")
+def summarize(req: Request):
+    return {"summary": summarize_email(req.text)}
