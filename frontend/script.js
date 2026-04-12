@@ -9,13 +9,31 @@ async function generateSummary() {
     return;
   }
 
-  // show card
-  card.classList.remove("hidden");
+// show card
+const API_BASE = "https://nimbleai.onrender.com";
 
+async function callAPI(type, input) {
+  let endpoint = "";
+
+  // 🎯 map แต่ละ feature → endpoint
+  if (type === "email") {
+    endpoint = "/email/summarize";
+  } else if (type === "task") {
+    endpoint = "/task/generate";
+  } else if (type === "reply") {
+    endpoint = "/reply/generate";
+  } else if (type === "file") {
+    endpoint = "/file/analyze";
+  }
+
+  const card = document.querySelector(".card");
+  const output = document.querySelector(".output");
+
+  card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating...</p>";
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/email/summarize", {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -25,12 +43,20 @@ async function generateSummary() {
 
     const data = await res.json();
 
-    output.innerHTML = `<p>${data.summary}</p>`;
+    // 🎯 รองรับหลาย response format
+    const result =
+      data.summary ||
+      data.tasks ||
+      data.reply ||
+      data.result ||
+      "No result";
+
+    output.innerHTML = `<p>${result}</p>`;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
+    console.error(err);
   }
 }
-
 
 // ===== TASK =====
 async function generateTasks() {
