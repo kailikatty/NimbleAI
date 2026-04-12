@@ -79,10 +79,10 @@ async function analyzeFile() {
 async function callAPI(type, input, output) {
   let endpoint = "";
 
-  if (type === "email") endpoint = "/email/summarize";
-  else if (type === "task") endpoint = "/task/generate";
-  else if (type === "reply") endpoint = "/reply/generate";
-  else if (type === "file") endpoint = "/file/analyze";
+  if (type === "email") endpoint = "/email/email/summarize";
+  else if (type === "task") endpoint = "/task/task/generate";
+  else if (type === "reply") endpoint = "/reply/reply/generate";
+  else if (type === "file") endpoint = "/file/file/analyze";
 
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
