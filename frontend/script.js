@@ -104,6 +104,12 @@ async function callAPI(type, input, output) {
       data.result ||
       "No result";
 
+    const formatted = result
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // ตัวหนา
+      .replace(/\n/g, "<br>"); // ขึ้นบรรทัด
+
+    output.innerHTML = `<div style="white-space: pre-wrap; line-height:1.6;">${formatted}</div>`;
+
     output.innerHTML = `<p>${result}</p>`;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
