@@ -175,3 +175,4 @@ function addMessage(text, sender) {
 window.onload = function () {
   showPage('overview');
 };
+}
