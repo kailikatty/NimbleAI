@@ -116,7 +116,6 @@ async function callAPI(type, input, output) {
 
   // 🔥 เผื่อมี \n จริง
       .replace(/\n/g, "<br>");
-      .replace(/\. /g, ".<br>"); 
 
     output.innerHTML = `
       <div style="line-height:1.8; white-space:normal;">
