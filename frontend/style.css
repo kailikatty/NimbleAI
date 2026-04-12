@@ -194,18 +194,6 @@ button:active {
   box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
-/* ===== Quick Actions ===== */
-.quick-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.feature button,
-.quick-actions button {
-  width: fit-content;
-  padding: 10px 16px;
-}
 
 /* ===== Mobile ===== */
 @media (max-width: 768px) {
