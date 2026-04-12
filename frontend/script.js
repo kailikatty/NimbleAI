@@ -26,7 +26,10 @@ async function generateTasks() {
   const output = document.getElementById("taskOutput");
   const card = document.getElementById("taskResultCard");
 
-  if (!input) return;
+  if (!input) {
+    output.innerHTML = "<p class='empty'>Please enter task</p>";
+    return;
+  }
 
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating tasks...</p>";
@@ -41,7 +44,10 @@ async function generateReply() {
   const output = document.getElementById("replyOutput");
   const card = document.getElementById("replyResultCard");
 
-  if (!input) return;
+  if (!input) {
+    output.innerHTML = "<p class='empty'>Please enter message</p>";
+    return;
+  }
 
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating reply...</p>";
@@ -64,7 +70,7 @@ async function analyzeFile() {
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Analyzing file...</p>";
 
-  // (ตอนนี้ backend ยังไม่ได้รับ file จริง ใช้ชื่อแทนก่อน)
+  // ใช้ชื่อไฟล์เป็น input ก่อน
   await callAPI("file", file.name, output);
 }
 
@@ -73,15 +79,10 @@ async function analyzeFile() {
 async function callAPI(type, input, output) {
   let endpoint = "";
 
-  if (type === "email") {
-    endpoint = "/email/summarize";
-  } else if (type === "task") {
-    endpoint = "/task/generate";
-  } else if (type === "reply") {
-    endpoint = "/reply/generate";
-  } else if (type === "file") {
-    endpoint = "/file/analyze";
-  }
+  if (type === "email") endpoint = "/email/summarize";
+  else if (type === "task") endpoint = "/task/generate";
+  else if (type === "reply") endpoint = "/reply/generate";
+  else if (type === "file") endpoint = "/file/analyze";
 
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
@@ -92,19 +93,26 @@ async function callAPI(type, input, output) {
       body: JSON.stringify({ text: input })
     });
 
+    // 🔥 เช็ค status กันพัง
+    if (!res.ok) {
+      throw new Error("API error");
+    }
+
     const data = await res.json();
+    console.log("API response:", data); // debug
 
     const result =
       data.summary ||
       data.tasks ||
       data.reply ||
       data.result ||
+      data.message ||
       "No result";
 
     output.innerHTML = `<p>${result}</p>`;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
-    console.error(err);
+    console.error("API ERROR:", err);
   }
 }
 
