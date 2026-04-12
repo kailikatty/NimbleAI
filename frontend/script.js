@@ -94,25 +94,20 @@ async function callAPI(type, input, output) {
     });
 
     // 🔥 เช็ค status กันพัง
-    if (!res.ok) {
-      throw new Error("API error");
-    }
 
     const data = await res.json();
-    console.log("API response:", data); // debug
 
     const result =
       data.summary ||
       data.tasks ||
       data.reply ||
       data.result ||
-      data.message ||
       "No result";
 
     output.innerHTML = `<p>${result}</p>`;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
-    console.error("API ERROR:", err);
+    console.error(err);
   }
 }
 
