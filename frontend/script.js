@@ -105,11 +105,16 @@ async function callAPI(type, input, output) {
       "No result";
 
     const formatted = result
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // ตัวหนา
-      .replace(/\n/g, "<br>"); // ขึ้นบรรทัด
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // แปลง **bold** → ตัวหนา
+      .replace(/\*/g, "") // 🔥 ลบ * ที่เหลือทั้งหมด
+      .replace(/(\d+\.\s)/g, "<br>$1") // ขึ้นบรรทัดใหม่ 1. 2. 3.
+      .replace(/\n/g, "<br>"); // รองรับ newline
 
-    output.innerHTML = `<div style="white-space: pre-wrap; line-height:1.6;">${formatted}</div>`;
-
+    output.innerHTML = `
+      <div style="line-height:1.6;">
+        ${formatted}
+      </div>
+    `;
     output.innerHTML = `<p>${result}</p>`;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
