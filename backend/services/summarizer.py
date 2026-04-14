@@ -9,23 +9,8 @@ Instructions:
 - Analyze the key points and intent of the email.
 - Ensure the summary is precise, concise, and easy to understand.
 - Use clear paragraph spacing.
-- Structure the output into numbered sections (1, 2, 3, 4).
 - Start each section on a new line.
 - Add a line break between sections for readability.
-
-Format:
-
-1. Main Purpose:
-[summary]
-
-2. Key Points:
-[bullet or short sentences]
-
-3. Important Details:
-[important info, dates, actions]
-
-4. Suggested Action:
-[what should be done]
 
 Email:
 \"\"\"
