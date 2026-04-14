@@ -12,7 +12,7 @@ function formatTask(text) {
   return text
     .replace(/\*/g, "")
     .replace(/\n/g, "<br>")
-    .replace(/(\d+\.\s*Step:)/, "<br><strong>$1</strong>");
+    .replace(/(\d+\.\s*Step:)/g, "<br><strong>$1</strong>");
 }
 
 function formatReply(text) {
@@ -121,8 +121,11 @@ async function callAPI(type, input, output) {
     const result =
       data.summary ||
       data.tasks ||
+      data.task ||
       data.reply ||
       data.result ||
+      data.output ||
+      data ||
       "No result";
 
     // 🔥 base format ใช้ร่วมกัน
@@ -140,7 +143,7 @@ async function callAPI(type, input, output) {
 
     if (type === "task") {
       formatted = formatted.replace(
-        /(\d+\.\s*Step:)/,
+        /(\d+\.\s*Step:)/g,
         "<br><strong>$1</strong>"
       );
     }
@@ -194,6 +197,7 @@ async function sendMessage() {
     });
 
     const data = await res.json();
+    console.log("API response:", data);
 
     addMessage(data.summary || "No response", "bot");
   } catch (err) {
