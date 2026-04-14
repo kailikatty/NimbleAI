@@ -26,7 +26,6 @@ function formatReply(text) {
 async function generateSummary() {
   const input = document.getElementById("emailInput").value;
   const output = document.getElementById("emailOutput");
-  output.style.whiteSpace = "pre-line";
   const card = document.getElementById("emailResultCard");
 
   if (!input) {
