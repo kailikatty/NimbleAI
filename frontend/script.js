@@ -6,6 +6,7 @@ const API_BASE = "https://nimbleai.onrender.com";
 async function generateSummary() {
   const input = document.getElementById("emailInput").value;
   const output = document.getElementById("emailOutput");
+  output.style.whiteSpace = "pre-line";
   const card = document.getElementById("emailResultCard");
 
   if (!input) {
@@ -123,7 +124,7 @@ async function callAPI(type, input, output) {
       </div>
     `;
     
-    output.innerHTML = `<p>${result}</p>`;
+    output.innerHTML = data.summary;
   } catch (err) {
     output.innerHTML = "<p class='empty'>Error occurred</p>";
     console.error(err);
