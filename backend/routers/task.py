@@ -7,6 +7,7 @@ router = APIRouter()
 class Request(BaseModel):
     text: str
 
-@router.post("/task/generate")
-def task(req: Request):
-    return {"tasks": generate_tasks(req.text)}
+@router.post("/task")
+def create_tasks(request: TaskRequest):
+    result = generate_tasks(request.text)
+    return {"tasks": result}
