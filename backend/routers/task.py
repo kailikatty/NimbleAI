@@ -4,7 +4,7 @@ from services.task_generator import generate_tasks
 
 router = APIRouter()
 
-class Request(BaseModel):
+class TaskRequest(BaseModel):
     text: str
 
 @router.post("/task")
