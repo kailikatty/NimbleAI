@@ -5,8 +5,12 @@ const API_BASE = "https://nimbleai.onrender.com";
 function formatEmail(text) {
   return text
     .replace(/\*/g, "")
-    .replace(/\n/g, "<br>");
-}
+    .replace(/\n/g, "<br>")
+    .replace(
+      /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
+      "<br><strong>$1</strong>"
+    );
+  }
 
 function formatTask(text) {
   return text
