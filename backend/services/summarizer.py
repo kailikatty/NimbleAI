@@ -1,14 +1,42 @@
 from .ai_service import generate
 
-def summarize_email(text: str):
-    prompt = f"""
-    Summarize this email clearly.
-    Include:
-    - Key points
-    - Action items
-    - Deadlines
+def build_prompt(email_text: str) -> str:
+    return f"""
+You are an AI assistant that summarizes emails clearly and accurately.
 
-    Email:
-    {text}
-    """
-    return generate(prompt)
+Instructions:
+- Summarize the email in less than 150 words.
+- Analyze the key points and intent of the email.
+- Ensure the summary is precise, concise, and easy to understand.
+- Use clear paragraph spacing.
+- Structure the output into numbered sections (1, 2, 3, 4).
+- Start each section on a new line.
+- Add a line break between sections for readability.
+
+Format:
+
+1. Main Purpose:
+[summary]
+
+2. Key Points:
+[bullet or short sentences]
+
+3. Important Details:
+[important info, dates, actions]
+
+4. Suggested Action:
+[what should be done]
+
+Email:
+\"\"\"
+{email_text}
+\"\"\"
+"""
+
+def summarize_email(email_text: str) -> str:
+    prompt = build_prompt(email_text)
+
+    # 👇 ตรงนี้คือ "จบ"
+    result = generate(prompt)
+
+    return result
