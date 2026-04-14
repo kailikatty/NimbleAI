@@ -2,6 +2,30 @@
 const API_BASE = "https://nimbleai.onrender.com";
 
 
+function formatEmail(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>")
+    .replace(
+      /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
+      "<br><strong>$1</strong>"
+    );
+}
+
+function formatTask(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>")
+    .replace(/(\d+\.\s*Step:)/, "<br><strong>$1</strong>");
+}
+
+function formatReply(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>");
+}
+
+
 // ===== EMAIL =====
 async function generateSummary() {
   const input = document.getElementById("emailInput").value;
@@ -105,30 +129,33 @@ async function callAPI(type, input, output) {
       data.result ||
       "No result";
 
-    const formatted = result
-  // 🔥 ลบ * ทุกแบบก่อน (สำคัญมาก)
+    // 🔥 base format ใช้ร่วมกัน
+    let formatted = result
       .replace(/\*/g, "")
-
-  // 🔥 บังคับขึ้นบรรทัดใหม่เมื่อเจอหัวข้อสำคัญ
-      .replace(/(Key Points:|Action Items:|Deadlines:)/g, "<br><strong>$1</strong>")
-
-  // 🔥 แยกเลขข้อ 1. 2. 3.
-      .replace(/(\d+\.\s)/g, "<br>$1")
-
-  // 🔥 เผื่อมี \n จริง
       .replace(/\n/g, "<br>");
 
+    // 🔥 tweak เฉพาะบาง type (เล็กน้อยพอ)
+    if (type === "email") {
+      formatted = formatted.replace(
+        /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
+        "<br><strong>$1</strong>"
+      );
+    }
+
+    if (type === "task") {
+      formatted = formatted.replace(
+        /(\d+\.\s*Step:)/,
+        "<br><strong>$1</strong>"
+      );
+    }
+
+    // ✅ render ครั้งเดียวพอ
     output.innerHTML = `
-      <div style="line-height:1.8; white-space:normal;">
+      <div style="line-height:1.8;">
         ${formatted}
       </div>
     `;
-    
-    output.innerHTML = data.summary;
-  } catch (err) {
-    output.innerHTML = "<p class='empty'>Error occurred</p>";
-    console.error(err);
-  }
+    }
 }
 
 
