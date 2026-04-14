@@ -155,7 +155,11 @@ async function callAPI(type, input, output) {
         ${formatted}
       </div>
     `;
-    }
+    
+  } catch (err) {
+    console.error(err);
+    output.innerHTML = "<p class='empty'>Error occurred</p>";  
+  }
 }
 
 
