@@ -5,7 +5,7 @@ def build_prompt(email_text: str) -> str:
 You are an AI assistant that summarizes emails clearly and accurately.
 
 Instructions:
-- Summarize the email in less than 120 words.
+- Summarize the email in less than 150 words.
 - Ensure the summary is precise, concise, and easy to understand.
 - Use clear paragraph spacing.
 - Start each section on a new line.
