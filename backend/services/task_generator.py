@@ -10,7 +10,6 @@ Follow ALL instructions strictly.
 - Break it down into logical, step-by-step actions.
 - Keep each step concise and practical.
 - Use simple and professional English.
-- Limit the response to under 150 words.
 
 Formatting rules:
 - Do NOT use markdown, **, *, or special symbols.
