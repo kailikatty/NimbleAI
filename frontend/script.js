@@ -1,3 +1,31 @@
+// ===== CONFIG =====
+const API_BASE = "https://nimbleai.onrender.com";
+
+
+function formatEmail(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>")
+    .replace(
+      /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
+      "<br><strong>$1</strong>"
+    );
+  }
+
+function formatTask(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>")
+    .replace(/(\d+\.\s*Step:)/g, "<br><strong>$1</strong>");
+}
+
+function formatReply(text) {
+  return text
+    .replace(/\*/g, "")
+    .replace(/\n/g, "<br>");
+}
+
+
 // ===== EMAIL =====
 async function generateSummary() {
   const input = document.getElementById("emailInput").value;
@@ -9,54 +37,12 @@ async function generateSummary() {
     return;
   }
 
-// show card
-const API_BASE = "https://nimbleai.onrender.com";
-
-async function callAPI(type, input) {
-  let endpoint = "";
-
-  // 🎯 map แต่ละ feature → endpoint
-  if (type === "email") {
-    endpoint = "/email/summarize";
-  } else if (type === "task") {
-    endpoint = "/task/generate";
-  } else if (type === "reply") {
-    endpoint = "/reply/generate";
-  } else if (type === "file") {
-    endpoint = "/file/analyze";
-  }
-
-  const card = document.querySelector(".card");
-  const output = document.querySelector(".output");
-
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating...</p>";
 
-  try {
-    const res = await fetch(`${API_BASE}${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ text: input })
-    });
-
-    const data = await res.json();
-
-    // 🎯 รองรับหลาย response format
-    const result =
-      data.summary ||
-      data.tasks ||
-      data.reply ||
-      data.result ||
-      "No result";
-
-    output.innerHTML = `<p>${result}</p>`;
-  } catch (err) {
-    output.innerHTML = "<p class='empty'>Error occurred</p>";
-    console.error(err);
-  }
+  await callAPI("email", input, output);
 }
+
 
 // ===== TASK =====
 async function generateTasks() {
@@ -64,21 +50,15 @@ async function generateTasks() {
   const output = document.getElementById("taskOutput");
   const card = document.getElementById("taskResultCard");
 
-  if (!input) return;
+  if (!input) {
+    output.innerHTML = "<p class='empty'>Please enter task</p>";
+    return;
+  }
 
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating tasks...</p>";
 
-  // mock ก่อน (ยังไม่ต้อง AI)
-  setTimeout(() => {
-    output.innerHTML = `
-      <ul>
-        <li>Break down the task</li>
-        <li>Set priorities</li>
-        <li>Start execution</li>
-      </ul>
-    `;
-  }, 500);
+  await callAPI("task", input, output);
 }
 
 
@@ -88,14 +68,15 @@ async function generateReply() {
   const output = document.getElementById("replyOutput");
   const card = document.getElementById("replyResultCard");
 
-  if (!input) return;
+  if (!input) {
+    output.innerHTML = "<p class='empty'>Please enter message</p>";
+    return;
+  }
 
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Generating reply...</p>";
 
-  setTimeout(() => {
-    output.innerHTML = "<p>Thanks for your message. I’ll get back to you shortly.</p>";
-  }, 500);
+  await callAPI("reply", input, output);
 }
 
 
@@ -113,14 +94,79 @@ async function analyzeFile() {
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Analyzing file...</p>";
 
-  setTimeout(() => {
-    output.innerHTML = `<p>File "${file.name}" analyzed successfully.</p>`;
-  }, 800);
+  // ใช้ชื่อไฟล์เป็น input ก่อน
+  await callAPI("file", file.name, output);
+}
+
+
+// ===== CORE API FUNCTION =====
+async function callAPI(type, input, output) {
+  let endpoint = "";
+
+  if (type === "email") endpoint = "/email/email/summarize";
+  else if (type === "task") endpoint = "/task/task/generate";
+  else if (type === "reply") endpoint = "/reply/reply/generate";
+  else if (type === "file") endpoint = "/file/file/analyze";
+
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: input })
+    });
+
+    // 🔥 เช็ค status กันพัง
+
+    const data = await res.json();
+
+    const result =
+      data.summary ||
+      data.tasks ||
+      data.task ||
+      data.reply ||
+      data.result ||
+      data.output ||
+      data ||
+      "No result";
+
+    // 🔥 base format ใช้ร่วมกัน
+    let formatted = result
+      .replace(/\*/g, "")
+      .replace(/\n/g, "<br>");
+
+    // 🔥 tweak เฉพาะบาง type (เล็กน้อยพอ)
+    if (type === "email") {
+      formatted = formatted.replace(
+        /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
+        "<br><strong>$1</strong>"
+      );
+    }
+
+    if (type === "task") {
+      formatted = formatted.replace(
+        /(\d+\.\s*Step:)/g,
+        "<br><strong>$1</strong>"
+      );
+    }
+
+    // ✅ render ครั้งเดียวพอ
+    output.innerHTML = `
+      <div style="line-height:1.8;">
+        ${formatted}
+      </div>
+    `;
+    
+  } catch (err) {
+    console.error(err);
+    output.innerHTML = "<p class='empty'>Error occurred</p>";  
+  }
 }
 
 
 // ===== NAVIGATION =====
-function showPage(pageId) {
+function showPage(pageId, el) {
   document.querySelectorAll('.page').forEach(p => {
     p.style.display = 'none';
   });
@@ -131,7 +177,7 @@ function showPage(pageId) {
     li.classList.remove('active');
   });
 
-  event.target.classList.add('active');
+  if (el) el.classList.add('active');
 }
 
 
@@ -144,21 +190,28 @@ async function sendMessage() {
 
   addMessage(message, "user");
 
-  const res = await fetch("http://127.0.0.1:8000/email/summarize", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ text: message }),
-  });
+  try {
+    const res = await fetch(`${API_BASE}/email/summarize`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: message }),
+    });
 
-  const data = await res.json();
+    const data = await res.json();
+    console.log("API response:", data);
 
-  addMessage(data.summary, "bot");
+    addMessage(data.summary || "No response", "bot");
+  } catch (err) {
+    addMessage("Error occurred", "bot");
+  }
 
   input.value = "";
 }
 
+
+// ===== CHAT UI =====
 function addMessage(text, sender) {
   const chatBox = document.getElementById("chatBox");
 
@@ -175,4 +228,3 @@ function addMessage(text, sender) {
 window.onload = function () {
   showPage('overview');
 };
-}
