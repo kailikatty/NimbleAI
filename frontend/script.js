@@ -140,11 +140,24 @@ async function callAPI(type, input, output) {
       data ||
       "No result";
 
-    // ❗ กัน error 503
-    if (typeof result === "string" && result.includes("503")) {
-      output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";
+
+    const res = await fetch(...);
+
+    // ✅ เช็คตรงนี้ก่อน
+    if (!res.ok) {
+      const text = await res.text();
+
+      if (text.includes("503")) {
+        output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";
+      } else {
+        output.innerHTML = `<p class='empty'>${text}</p>`;
+      }
+
       return;
     }
+
+    const data = await res.json();
+
 
     let formatted = result
       .replace(/\*/g, "")
