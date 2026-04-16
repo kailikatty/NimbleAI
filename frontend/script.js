@@ -10,7 +10,7 @@ function formatEmail(text) {
       /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
       "<br><strong>$1</strong>"
     );
-  }
+}
 
 function formatTask(text) {
   return text
@@ -94,7 +94,6 @@ async function analyzeFile() {
   card.classList.remove("hidden");
   output.innerHTML = "<p class='empty'>Analyzing file...</p>";
 
-  // ใช้ชื่อไฟล์เป็น input ก่อน
   await callAPI("file", file.name, output);
 }
 
@@ -104,12 +103,15 @@ async function callAPI(type, input, output) {
   let endpoint = "";
 
   if (type === "email") endpoint = "/email/email/summarize";
-  else if (type === "task") endpoint = "/task/task/generate";
+  else if (type === "task") endpoint = "/task/task"; 
   else if (type === "reply") endpoint = "/reply/reply/generate";
   else if (type === "file") endpoint = "/file/file/analyze";
 
+  const url = `${API_BASE}${endpoint}`;
+  console.log("CALLING:", url);
+
   try {
-    const res = await fetch(`${API_BASE}${endpoint}`, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -117,9 +119,16 @@ async function callAPI(type, input, output) {
       body: JSON.stringify({ text: input })
     });
 
-    // 🔥 เช็ค status กันพัง
+    // เช็ค error จาก backend
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("ERROR RESPONSE:", text);
+      output.innerHTML = `<p class='empty'>${text}</p>`;
+      return;
+    }
 
     const data = await res.json();
+    console.log("DATA:", data);
 
     const result =
       data.summary ||
@@ -131,12 +140,16 @@ async function callAPI(type, input, output) {
       data ||
       "No result";
 
-    // 🔥 base format ใช้ร่วมกัน
+    // ❗ กันกรณี AI error เช่น 503
+    if (typeof result === "string" && result.includes("Error")) {
+      output.innerHTML = `<p class='empty'>${result}</p>`;
+      return;
+    }
+
     let formatted = result
       .replace(/\*/g, "")
       .replace(/\n/g, "<br>");
 
-    // 🔥 tweak เฉพาะบาง type (เล็กน้อยพอ)
     if (type === "email") {
       formatted = formatted.replace(
         /(Main Purpose:|Key Points:|Important Details:|Suggested Action:)/g,
@@ -151,7 +164,6 @@ async function callAPI(type, input, output) {
       );
     }
 
-    // ✅ render ครั้งเดียวพอ
     output.innerHTML = `
       <div style="line-height:1.8;">
         ${formatted}
@@ -159,7 +171,7 @@ async function callAPI(type, input, output) {
     `;
     
   } catch (err) {
-    console.error(err);
+    console.error("FETCH ERROR:", err);
     output.innerHTML = "<p class='empty'>Error occurred</p>";  
   }
 }
@@ -191,7 +203,7 @@ async function sendMessage() {
   addMessage(message, "user");
 
   try {
-    const res = await fetch(`${API_BASE}/email/summarize`, {
+    const res = await fetch(`${API_BASE}/email/email/summarize`, { 
       method: "POST",
       headers: {
         "Content-Type": "application/json",
