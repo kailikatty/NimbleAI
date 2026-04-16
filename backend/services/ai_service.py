@@ -13,4 +13,11 @@ def generate(prompt: str):
         return getattr(response, "text", None) or str(response)
 
     except Exception as e:
-        return f"Error: {str(e)}"
+        if "503" in str(e):
+            print(f"Retry {attempt+1}...")
+            time.sleep(2)  # รอ 2 วิ
+        else:
+            return f"Error: {str(e)}"
+
+    return "Error: Server busy, please try again."
+    
