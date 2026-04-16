@@ -31,9 +31,12 @@ User Task:
 """
 
 def generate_tasks(user_input: str) -> str:
-    try:
-        prompt = build_task_prompt(user_input)
-        result = generate(prompt)
-        return result if result else "No response generated."
-    except Exception as e:
-        return f"Error: {str(e)}"
+    print("INPUT:", user_input)
+
+    prompt = build_task_prompt(user_input)
+    print("PROMPT:", prompt)
+
+    result = generate(prompt)
+    print("RESULT:", result)
+
+    return result
