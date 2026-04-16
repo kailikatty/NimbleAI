@@ -140,9 +140,9 @@ async function callAPI(type, input, output) {
       data ||
       "No result";
 
-    // ❗ กันกรณี AI error เช่น 503
-    if (typeof result === "string" && result.includes("Error")) {
-      output.innerHTML = `<p class='empty'>${result}</p>`;
+    // ❗ กัน error 503
+    if (typeof result === "string" && result.includes("503")) {
+      output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";
       return;
     }
 
