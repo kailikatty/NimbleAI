@@ -1,4 +1,4 @@
-from .ai_service import generate
+from services.ai_service import generate
 
 def build_task_prompt(user_input: str) -> str:
     return f"""
