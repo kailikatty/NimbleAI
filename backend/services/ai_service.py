@@ -9,6 +9,8 @@ def generate(prompt: str):
             model="gemini-2.5-flash",
             contents=prompt
         )
-        return response.text
+        # safest way
+        return getattr(response, "text", None) or str(response)
+
     except Exception as e:
         return f"Error: {str(e)}"
