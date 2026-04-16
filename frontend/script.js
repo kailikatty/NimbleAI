@@ -122,11 +122,14 @@ async function callAPI(type, input, output) {
     // เช็ค error จาก backend
     if (!res.ok) {
       const text = await res.text();
-      console.error("ERROR RESPONSE:", text);
-      output.innerHTML = `<p class='empty'>${text}</p>`;
+      if (text.includes("503")) {
+        output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";
+      } else {
+        output.innerHTML = `<p class='empty'>${text}</p>`;
+      }
       return;
     }
-
+  
     const data = await res.json();
     console.log("DATA:", data);
 
@@ -141,23 +144,7 @@ async function callAPI(type, input, output) {
       "No result";
 
 
-    const res = await fetch(...);
-
-    // ✅ เช็คตรงนี้ก่อน
-    if (!res.ok) {
-      const text = await res.text();
-
-      if (text.includes("503")) {
-        output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";
-      } else {
-        output.innerHTML = `<p class='empty'>${text}</p>`;
-      }
-
-      return;
-    }
-
-    const data = await res.json();
-
+    
 
     let formatted = result
       .replace(/\*/g, "")
