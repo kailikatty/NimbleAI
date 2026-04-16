@@ -20,10 +20,10 @@ Formatting rules:
 
 Output format:
 
-1. Step: <title>
+1. <title>
 Details: <short explanation>
 
-2. Step: <title>
+2. <title>
 Details: <short explanation>
 
 User Task:
