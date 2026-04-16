@@ -21,10 +21,10 @@ Formatting rules:
 Output format:
 
 1. <title>
-Details: <short explanation>
+<short explanation>
 
 2. <title>
-Details: <short explanation>
+<short explanation>
 
 User Task:
 {user_input}
