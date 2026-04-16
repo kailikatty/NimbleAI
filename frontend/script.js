@@ -16,7 +16,7 @@ function formatTask(text) {
   return text
     .replace(/\*/g, "")
     .replace(/\n/g, "<br>")
-    .replace(/(\d+\.\s*Step:)/g, "<br><br><strong>$1</strong>");
+    .replace(/(\d+\.\s*Step:)/g, "<strong>$1</strong>");
 }
 
 function formatReply(text) {
