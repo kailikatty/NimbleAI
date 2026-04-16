@@ -172,7 +172,7 @@ async function callAPI(type, input, output) {
     
   } catch (err) {
     console.error("FETCH ERROR:", err);
-    output.innerHTML = "<p class='empty'>Error occurred</p>";  
+    output.innerHTML = "<p class='empty'>Server busy, try again in a few seconds</p>";  
   }
 }
 
