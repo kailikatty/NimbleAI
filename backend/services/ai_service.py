@@ -9,6 +9,7 @@ def generate(prompt: str):
 
     for attempt in range(max_retries):
         try:
+            print("🤖 Sending request to AI...")
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt
@@ -16,6 +17,7 @@ def generate(prompt: str):
             return getattr(response, "text", None) or str(response)
 
         except Exception as e:
+            print("❌ AI error:", str(e))
             if "503" in str(e):
                 print(f"Retry {attempt+1}...")
                 time.sleep(2)
