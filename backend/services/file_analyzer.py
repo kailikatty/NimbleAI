@@ -31,10 +31,15 @@ def analyze_file(file_bytes, filename: str):
         file.seek(0)
         text = extract_txt(file)
 
+        print("TXT CONTENT:", text[:100])  # debug
+
     else:
         print("❌ NOT SUPPORTED:", filename)  # debug
         return "Unsupported file type"
 
+    if not text:
+        return "No content extracted from file"
+        
     # 🔥 กัน text ยาวเกิน
     text = text[:5000]
 
