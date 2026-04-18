@@ -27,7 +27,7 @@ def analyze_file(file_bytes, filename: str):
 
     # ✅ ส่งเข้า AI
     prompt = f"""
-You are an AI File Analyzer.
+You are an AI File Analyzer. Follow all instruction strictly.
 
 Step 1:
 Identify the type of content (e.g., resume, report, email, article, data, presentation, etc.)
@@ -36,21 +36,11 @@ Step 2:
 Based on the detected type, analyze the content appropriately.
 
 Step 3:
-Adapt your analysis depth based on the complexity of the content.
-
-Important:
-- Use a professional and clear tone
-- Format the output cleanly for web display
-- Each section MUST start on a new line
-- Add a blank line between sections
+- Use a professional English and clear tone
 - Use plain text only (no markdown symbols like ** or ##) 
-- Do not invent information
+- DO NOT invent information
 
-Output structure:
-
-Content Type:
-State what type of file this is.
-
+Output format:
 Summary:
 <summary>
 
