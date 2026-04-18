@@ -1,5 +1,8 @@
 import pandas as pd
 
 def extract_excel(file):
-    df = pd.read_excel(file)
-    return df.to_string()
+    try:
+        df = pd.read_excel(file)
+        return df.to_string()
+    except Exception as e:
+        return f"Error reading Excel file: {str(e)}"
