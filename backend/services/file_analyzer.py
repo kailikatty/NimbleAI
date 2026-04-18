@@ -38,9 +38,12 @@ Based on the detected type, analyze the content appropriately.
 Step 3:
 Adapt your analysis depth based on the complexity of the content.
 
-Guidelines:
+Important:
 - Use a professional and clear tone
 - Format the output cleanly for web display
+- Each section MUST start on a new line
+- Add a blank line between sections
+- Use plain text only (no markdown symbols like ** or ##) 
 - Do not invent information
 
 Output structure:
@@ -49,16 +52,23 @@ Content Type:
 State what type of file this is.
 
 Summary:
-Provide a concise summary.
+<summary>
 
 Key Insights:
-Provide 3–5 important insights.
+1. ...
+2. ...
+3. ...
 
 Key Points:
-List main points in numbered format.
+1. ...
+2. ...
+3. ...
 
 If the content is a resume:
 - Add: Strengths, Weaknesses, Suggestions
+1. ...
+2. ...
+3. ...
 
 If the content is a report/article:
 - Add: Key Findings, Conclusion
