@@ -122,6 +122,13 @@ h1 {
   padding: 10px;
 }
 
+.file-hint {
+  font-size: 13px;
+  color: #999;
+  margin-top: 2px;
+  margin-bottom: 6px;
+}
+
 /* ===== Hidden ===== */
 .hidden {
   display: none;
