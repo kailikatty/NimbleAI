@@ -11,19 +11,28 @@ from services.parsers.txt_parser import extract_txt
 def analyze_file(file_bytes, filename: str):
     file = BytesIO(file_bytes)
 
+    # 🔥 เพิ่มตรงนี้เลย
+    ext = filename.lower().strip()
+
     # ✅ เลือก parser ตาม type
-    if filename.lower().endswith(".pdf"):
+    if ext.endswith(".pdf"):
         text = extract_pdf(file)
-    elif filename.lower().endswith(".docx"):
+
+    elif ext.endswith(".docx"):
         text = extract_docx(file)
-    elif filename.lower().endswith(".xlsx"):
+
+    elif ext.endswith(".xlsx"):
         text = extract_excel(file)
-    elif filename.lower().endswith(".pptx"):
+
+    elif ext.endswith(".pptx"):
         text = extract_ppt(file)
-    elif filename.lower().endswith(".txt"):
+
+    elif ext.endswith(".txt"):
         file.seek(0)
         text = extract_txt(file)
+
     else:
+        print("❌ NOT SUPPORTED:", filename)  # debug
         return "Unsupported file type"
 
     # 🔥 กัน text ยาวเกิน
