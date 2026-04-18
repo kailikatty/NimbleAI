@@ -25,6 +25,10 @@ function formatReply(text) {
     .replace(/\n/g, "<br>");
 }
 
+function analyzeFile() {
+  console.log("CLICKED");
+}
+
 
 // ===== EMAIL =====
 async function generateSummary() {
