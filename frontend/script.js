@@ -90,12 +90,14 @@ async function analyzeFile() {
   console.log("CLICKED");
   const file = document.getElementById("fileInput").files[0];
   const output = document.getElementById("fileOutput");
+  const card = document.getElementById("fileResultCard");
 
   if (!file) {
     output.innerHTML = "Please upload a file";
     return;
   }
-
+  
+  card.classList.remove("hidden");
   output.innerHTML = "Analyzing...";
 
   const formData = new FormData();
