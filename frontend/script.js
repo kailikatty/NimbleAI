@@ -119,7 +119,6 @@ async function analyzeFile() {
   // ❌ ลบ markdown ที่ไม่สวย
   text = text.replace(/#{1,6}\s*/g, "");   // ลบ ## ###
   text = text.replace(/\*\*/g, "");        // ลบ **
-  text = text.replace(/\*/g, "");          // ลบ *
 
   // ✅ เว้นบรรทัดใหม่
   text = text.replace(/\n/g, "<br>");
@@ -129,8 +128,8 @@ async function analyzeFile() {
 
   // ✅ ทำหัวข้อ
   text = text.replace(
-    /(Article:|Summary:|Main Points:|Key Points:|Important Details:|Conclusion:)/g,
-    "<br><br><strong>$1</strong><br>"
+    /(Article:|Summary:|Main Points:|Key Points:|Key Takeaways:|Key Insights:|Important Details:|Conclusion:)/g,
+    "<br><strong>$1</strong>"
   );
 
 // ✅ แสดงผล
