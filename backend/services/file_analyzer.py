@@ -40,7 +40,6 @@ Adapt your analysis depth based on the complexity of the content.
 
 Guidelines:
 - Use a professional and clear tone
-- Do NOT use markdown symbols like ** or ##
 - Format the output cleanly for web display
 - Do not invent information
 
