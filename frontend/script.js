@@ -127,7 +127,7 @@ async function analyzeFile() {
 
   // ✅ ทำหัวข้อ
   text = text.replace(
-    /(Article:|Summary:|Main Points:|Key Points:|Key Takeaways:|Key Insights:|Important Details:|Conclusion:|Strengths:|Weaknesses:|Suggestions:|Key Findings:|Trends:|Observations:|Recommendations:|)/g,
+    /(Article:|Summary:|Main Points:|Key Points:|Key Takeaways:|Key Insights:|Important Details:|Conclusion:|Strengths:|Weaknesses:|Suggestions:|Key Findings:|Trends:|Observations:|Recommendations:)/g,
     "<strong>$1</strong>"  
   );
 
