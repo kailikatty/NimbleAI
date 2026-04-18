@@ -27,12 +27,45 @@ def analyze_file(file_bytes, filename: str):
 
     # ✅ ส่งเข้า AI
     prompt = f"""
-Analyze this content and summarize key insights.
+You are an AI File Analyzer.
 
-Include:
-- Main points
-- Important details
-- Key takeaways
+Step 1:
+Identify the type of content (e.g., resume, report, email, article, data, presentation, etc.)
+
+Step 2:
+Based on the detected type, analyze the content appropriately.
+
+Step 3:
+Adapt your analysis depth based on the complexity of the content.
+
+Guidelines:
+- Use a professional and clear tone
+- Do NOT use markdown symbols like ** or ##
+- Format the output cleanly for web display
+- Do not invent information
+
+Output structure:
+
+Content Type:
+State what type of file this is.
+
+Summary:
+Provide a concise summary.
+
+Key Insights:
+Provide 3–5 important insights.
+
+Key Points:
+List main points in numbered format.
+
+If the content is a resume:
+- Add: Strengths, Weaknesses, Suggestions
+
+If the content is a report/article:
+- Add: Key Findings, Conclusion
+
+If the content is data (table, excel):
+- Add: Trends, Observations, Recommendations
 
 Content:
 {text}
