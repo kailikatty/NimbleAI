@@ -87,7 +87,6 @@ console.log("JS LOADED");
 // ===== FILE =====
 
 async function analyzeFile() {
-  console.log("CLICKED");
   const file = document.getElementById("fileInput").files[0];
   const output = document.getElementById("fileOutput");
   const card = document.getElementById("fileResultCard");
@@ -132,12 +131,12 @@ async function analyzeFile() {
     "<strong>$1</strong>"  
   );
 
-// ✅ แสดงผล
-output.innerHTML = `
-  <div style="line-height:1.8; font-size:15px;">
-    ${text}
-  </div>
-`;
+  // ✅ แสดงผล
+  output.innerHTML = `
+    <div style="line-height:1.8; font-size:15px;">
+      ${text}
+    </div>
+  `;
     
   } catch (err) {
     console.error(err);
