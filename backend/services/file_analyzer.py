@@ -28,43 +28,14 @@ def analyze_file(file_bytes, filename: str):
     # ✅ ส่งเข้า AI
     prompt = f"""
 You are an AI File Analyzer. Follow all instruction strictly.
-
-Step 1:
-Identify the type of content (e.g., resume, report, email, article, data, presentation, etc.)
-
-Step 2:
-Based on the detected type, analyze the content appropriately.
-
-Step 3:
+- Identify the type of content (e.g., resume, report, email, article, data, presentation, etc.)
+- Based on the detected type, analyze the content appropriately.
 - Use a professional English and clear tone
 - Use plain text only (no markdown symbols like ** or ##) 
 - DO NOT invent information
-
-Output format:
-Summary:
-<summary>
-
-Key Insights:
-1. ...
-2. ...
-3. ...
-
-Key Points:
-1. ...
-2. ...
-3. ...
-
-If the content is a resume:
-- Add: Strengths, Weaknesses, Suggestions
-1. ...
-2. ...
-3. ...
-
-If the content is a report/article:
-- Add: Key Findings, Conclusion
-
-If the content is data (table, excel):
-- Add: Trends, Observations, Recommendations
+- If the content is a resume, add Strengths, Weaknesses, Suggestions
+- If the content is a report/article, add Key Findings, Conclusion
+- If the content is data (table, excel), add Trends, Observations, Recommendations
 
 Content:
 {text}
