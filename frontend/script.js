@@ -83,10 +83,11 @@ async function generateReply() {
   await callAPI("reply", input, output);
 }
 
-
+console.log("JS LOADED");
 // ===== FILE =====
 
 async function analyzeFile() {
+  console.log("CLICKED");
   const file = document.getElementById("fileInput").files[0];
   const output = document.getElementById("fileOutput");
 
