@@ -261,3 +261,14 @@ function addMessage(text, sender) {
 window.onload = function () {
   showPage('overview');
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("#file button");
+
+  if (btn) {
+    btn.addEventListener("click", analyzeFile);
+    console.log("Button connected");
+  } else {
+    console.log("Button NOT found");
+  }
+});
