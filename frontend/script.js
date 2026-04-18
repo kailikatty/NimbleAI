@@ -121,24 +121,24 @@ async function analyzeFile() {
   text = text.replace(/\*\*/g, "");        // ลบ **
   text = text.replace(/\*/g, "");          // ลบ *
 
-  // ✅ ทำหัวข้อให้ดูดี
-  text = text.replace(
-    /(Summary of Key Insights|Main Points|Conclusion)/g,
-    "<br><br><strong style='font-size:18px;'>$1</strong><br>"
-  );
-
-  // ✅ ทำ list ให้ขึ้นบรรทัดใหม่
-  text = text.replace(/(\d+\.\s)/g, "<br>$1");
-
-  // ✅ เว้น paragraph
+  // ✅ เว้นบรรทัดใหม่
   text = text.replace(/\n/g, "<br>");
 
-  // ✅ แสดงผล
-  output.innerHTML = `
-    <div style="line-height:1.8; font-size:15px;">
-      ${text}
-    </div>
-  `;
+  // ✅ ทำ list (1. 2. 3.)
+  text = text.replace(/(\d+\.\s)/g, "<br>$1");
+
+  // ✅ ทำหัวข้อ
+  text = text.replace(
+    /(Article:|Summary:|Main Points:|Key Points:|Important Details:|Conclusion:)/g,
+    "<br><br><strong>$1</strong><br>"
+  );
+
+// ✅ แสดงผล
+output.innerHTML = `
+  <div style="line-height:1.8; font-size:15px;">
+    ${text}
+  </div>
+`;
     
   } catch (err) {
     console.error(err);
