@@ -113,8 +113,30 @@ async function analyzeFile() {
 
     console.log("RESPONSE:", data); // 👈 debug
 
-    output.innerHTML = data.result || JSON.stringify(data);
+    let text = data.result || JSON.stringify(data);
 
+  // ❌ ลบ **
+  text = text.replace(/\*\*/g, "");
+
+  // ✅ เว้นบรรทัดใหม่
+  text = text.replace(/\n/g, "<br>");
+
+  // ✅ ทำ list (1. 2. 3.)
+  text = text.replace(/(\d+\.\s)/g, "<br>$1");
+
+  // ✅ ทำหัวข้อ
+  text = text.replace(
+    /(Article:|Summary:|Main Points:|Key Points:|Important Details:|Conclusion:)/g,
+    "<br><br><strong>$1</strong><br>"
+  );
+
+  // ✅ แสดงผล
+  output.innerHTML = `
+    <div style="line-height:1.8; font-size:15px;">
+      ${text}
+    </div>
+  `;
+    
   } catch (err) {
     console.error(err);
     output.innerHTML = "Error analyzing file";
