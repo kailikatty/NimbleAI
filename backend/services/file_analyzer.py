@@ -6,6 +6,7 @@ from services.parsers.pdf_parser import extract_pdf
 from services.parsers.docx_parser import extract_docx
 from services.parsers.excel_parser import extract_excel
 from services.parsers.ppt_parser import extract_ppt
+from services.parsers.txt_parser import extract_txt
 
 def analyze_file(file_bytes, filename: str):
     file = BytesIO(file_bytes)
@@ -20,6 +21,7 @@ def analyze_file(file_bytes, filename: str):
     elif filename.endswith(".pptx"):
         text = extract_ppt(file)
     elif filename.endswith(".txt"):
+        file.seek(0)
         text = extract_txt(file)
     else:
         return "Unsupported file type"
