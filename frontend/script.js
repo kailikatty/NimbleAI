@@ -84,17 +84,22 @@ async function generateReply() {
 async function analyzeFile() {
   const file = document.getElementById("fileInput").files[0];
   const output = document.getElementById("fileOutput");
-  const card = document.getElementById("fileResultCard");
 
   if (!file) {
-    output.innerHTML = "<p class='empty'>Please upload a file</p>";
+    output.innerHTML = "Please upload a file";
     return;
   }
 
-  card.classList.remove("hidden");
-  output.innerHTML = "<p class='empty'>Analyzing file...</p>";
+  const formData = new FormData();
+  formData.append("upload_file", file);
 
-  await callAPI("file", file.name, output);
+  const res = await fetch(`${API_BASE}/file/analyze`, {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  output.innerHTML = data.result || JSON.stringify(data);
 }
 
 
@@ -105,7 +110,7 @@ async function callAPI(type, input, output) {
   if (type === "email") endpoint = "/email/email/summarize";
   else if (type === "task") endpoint = "/task/task"; 
   else if (type === "reply") endpoint = "/reply/reply/generate";
-  else if (type === "file") endpoint = "/file/file/analyze";
+  else if (type === "file") endpoint = "/file/analyze";
 
   const url = `${API_BASE}${endpoint}`;
   console.log("CALLING:", url);
