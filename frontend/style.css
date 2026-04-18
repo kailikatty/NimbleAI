@@ -137,7 +137,8 @@ h1 {
 .file-hint {
   font-size: 13px;
   color: #777;
-  margin: 0; /* 🔥 เอา margin ออกเลย */
+  margin-top: 4px;
+  padding-left: 8px; 
 }
 
 /* ===== Hidden ===== */
