@@ -129,7 +129,7 @@ async function analyzeFile() {
   // ✅ ทำหัวข้อ
   text = text.replace(
     /(Article:|Summary:|Main Points:|Key Points:|Key Takeaways:|Key Insights:|Important Details:|Conclusion:)/g,
-    "<br><strong>$1</strong>"
+    "<strong>$1</strong>"
   );
 
 // ✅ แสดงผล
