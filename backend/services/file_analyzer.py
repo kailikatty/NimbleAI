@@ -12,15 +12,15 @@ def analyze_file(file_bytes, filename: str):
     file = BytesIO(file_bytes)
 
     # ✅ เลือก parser ตาม type
-    if filename.endswith(".pdf"):
+    if filename.lower().endswith(".pdf"):
         text = extract_pdf(file)
-    elif filename.endswith(".docx"):
+    elif filename.lower().endswith(".docx"):
         text = extract_docx(file)
-    elif filename.endswith(".xlsx"):
+    elif filename.lower().endswith(".xlsx"):
         text = extract_excel(file)
-    elif filename.endswith(".pptx"):
+    elif filename.lower().endswith(".pptx"):
         text = extract_ppt(file)
-    elif filename.endswith(".txt"):
+    elif filename.lower().endswith(".txt"):
         file.seek(0)
         text = extract_txt(file)
     else:
