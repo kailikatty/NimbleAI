@@ -19,6 +19,8 @@ def analyze_file(file_bytes, filename: str):
         text = extract_excel(file)
     elif filename.endswith(".pptx"):
         text = extract_ppt(file)
+    elif filename.endswith(".txt"):
+        text = extract_txt(file)
     else:
         return "Unsupported file type"
 
