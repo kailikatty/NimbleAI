@@ -81,6 +81,7 @@ async function generateReply() {
 
 
 // ===== FILE =====
+
 async function analyzeFile() {
   const file = document.getElementById("fileInput").files[0];
   const output = document.getElementById("fileOutput");
@@ -90,18 +91,28 @@ async function analyzeFile() {
     return;
   }
 
+  output.innerHTML = "Analyzing...";
+
   const formData = new FormData();
   formData.append("upload_file", file);
 
-  const res = await fetch(`${API_BASE}/file/analyze`, {
-    method: "POST",
-    body: formData
-  });
+  try {
+    const res = await fetch(`${API_BASE}/file/analyze`, {
+      method: "POST",
+      body: formData
+    });
 
-  const data = await res.json();
-  output.innerHTML = data.result || JSON.stringify(data);
+    const data = await res.json();
+
+    console.log("RESPONSE:", data); // 👈 debug
+
+    output.innerHTML = data.result || JSON.stringify(data);
+
+  } catch (err) {
+    console.error(err);
+    output.innerHTML = "Error analyzing file";
+  }
 }
-
 
 // ===== CORE API FUNCTION =====
 async function callAPI(type, input, output) {
